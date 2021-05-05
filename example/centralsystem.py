@@ -1,23 +1,3 @@
-'''
-1.Before run this server, you should:  import websockets, asyncio, json, os
-
-2.set server ip address and port id in main function, for example :'132.148.83.34', 9000
-
-3.server can reveive the command come from clients.
-
-4.server can send command to clients. you can test all the functions, see "asyncio.gather()"
-
-5.data storage:
-(1) two data folder:
-    1.dataFromCp2Server:  initial form client, (req, con),that is to say, in this folder, data may come from cp or server, but, the data transfer process initial from cp.
-    2.dataFromServer2Cp:  initial form server, (req, con),that is to say, in this folder, data may come from cp or server, but, the data transfer process initial from server.
-
-(2) print data:
-  "cp -> server" represent the data come from cp to server.
-  "server -> cp" represent the data come from server to cp.
-'''
-
-
 import asyncio
 import logging
 
