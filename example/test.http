@@ -1,0 +1,8 @@
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"id":"CP_1"}' \
+  http://localhost:8080/disconnect
+
+
+
+
