@@ -576,7 +576,7 @@ async def create_http_server(csms: CentralSystem):
     app.add_routes([web.post("/disconnect", disconnect_charger)])
     app.add_routes([web.post("/remotestart", send_remote_start_transaction)])
     app.add_routes([web.post("/remotestop", send_remote_stop_transaction)])
-    app.add_routes([web.post("/limit", set_limitation)])
+    app.add_routes([web.post("/setmaxvalue", set_limitation)])
     # Put CSMS in app so it can be accessed from request handlers.
     # https://docs.aiohttp.org/en/stable/faq.html#where-do-i-put-my-database-connection-so-handlers-can-access-it
     app["csms"] = csms

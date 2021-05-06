@@ -2,19 +2,6 @@
 
 This project is based on OCPP protocol to build up a environment to test the MOEV.inc smart charging algorithm. 
 
-## 目录
-
-- [Quick Start](#Quick)
-  - [Python Version requirement](#Python)
-  - [Operating Procedure](#operating)
-- [文件目录说明](#文件目录说明)
-- [开发的架构](#开发的架构)
-- [部署](#部署)
-- [使用到的框架](#使用到的框架)
-- [贡献者](#贡献者)
-  - [如何参与开源项目](#如何参与开源项目)
-- [版本控制](#版本控制)
-
 ### Quick Start
 1. Before run this server, you should:  import websockets, asyncio, json, os
 
@@ -61,6 +48,53 @@ async def create_http_server(csms: CentralSystem):
 Please remember that http_server and websocket_server should have different port number
 
 ### API 
+
+Here is an example of a CSMS that can can be controlled using an HTTP API. The HTTP API has 2 endpoints:
+ - POST / - to change configuration for all connected chargers. It excepts a JSON body with the fields key and value.
+ - POST /disconnect - to disconnect a charger. It expects a JSON body with the field id that contains the charger ID.
+ - POST /remotestart - to trigger remote_start_transcation function to control the begining of charging process. It expects a JSON body with the field id that contains the charger ID.
+ - POST /remotestop - to trigger remote_stop_transcation function to control the end of charging process. It expects a JSON body with the field id that contains the charger ID.
+ - POST /setmaxvalue - to set the maxmium value of charging power(unit:A, Watts). It expects a JSON body with the field id that contains the charger ID and max value. 
+
+The HTTP server is running at port 8080. Here a few CURL examples:
+
+**Change config**
+```http
+$ curl --header "Content-Type: application/json"\
+  --request POST \ 
+  --data '{"key":"MeterValueSampleInterval","value":"10"}'\
+  http://localhost:8080/changeconfig
+```
+**Disconnect Charger**
+```http
+$ curl --header "Content-Type: application/json"\
+  --request POST \ 
+  --data '{"key":"MeterValueSampleInterval","value":"10"}'\
+  http://localhost:8080/changeconfig
+```
+**Remote start charging**
+```http
+$ curl --header "Content-Type: application/json"\
+  --request POST\
+  --data '{"id":"CP_1"}'\
+  http://localhost:8080/remotestart
+```
+**Remote stop charging**
+```http
+$ curl --header "Content-Type: application/json"\
+  --request POST\
+  --data '{"id":" CP_1"}'\
+  http://localhost:8080/remotestop
+```
+**Set the maxmium value of charging power**
+```http
+$ curl --header "Content-Type: application/json"\
+  --request POST\
+  --data '{"id":" CP_1", "limit":"8"}'\
+  http://localhost:8080/setmaxvalue
+```
+
+
 ### File catalog
 eg:
 
